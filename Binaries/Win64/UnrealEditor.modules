@@ -1,0 +1,8 @@
+{
+	"BuildId": "55116800",
+	"Modules": 
+	{
+		"MMD2UnrealCore": "UnrealEditor-MMD2UnrealCore.dll",
+		"MMD2UnrealEditor": "UnrealEditor-MMD2UnrealEditor.dll"
+	}
+}

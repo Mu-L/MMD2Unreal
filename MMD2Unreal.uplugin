@@ -1,0 +1,56 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.14.514",
+  "FriendlyName": "MMD2Unreal",
+  "Description": "次世代MMD的新入口",
+  "Icon": "Resources/Icon128.png",
+  "Category": "Importers",
+  "CreatedBy": "MMD2Unreal contributors",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "SupportedTargetPlatforms": [
+    "Win64"
+  ],
+  "Plugins": [
+    {
+      "Name": "IKRig",
+      "Enabled": true
+    },
+    {
+      "Name": "ControlRig",
+      "Enabled": true
+    },
+    {
+      "Name": "SequencerScripting",
+      "Enabled": true
+    },
+    {
+      "Name": "LevelSequenceEditor",
+      "Enabled": true
+    },
+    {
+      "Name": "VRM4U",
+      "Enabled": true,
+      "Optional": true
+    },
+    {
+      "Name": "KawaiiPhysics",
+      "Enabled": true,
+      "Optional": false
+    }
+  ],
+  "Modules": [
+    {
+      "Name": "MMD2UnrealCore",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "MMD2UnrealEditor",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# 发行包（release 包，不入库）
+Dist/
+
+# Unreal 生成物
+Binaries/Win64/UE5/
+Intermediate/
+DerivedDataCache/
+Saved/
+
+# 编辑器 / IDE
+.vs/
+.vscode/
+*.code-workspace
+*.sln
+*.xcodeproj
+*.xcworkspace
+
+# 系统垃圾
+Thumbs.db
+.DS_Store
