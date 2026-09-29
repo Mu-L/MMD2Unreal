@@ -1,7 +1,7 @@
 {
   "FileVersion": 3,
-  "Version": 1,
-  "VersionName": "1.14.514",
+  "Version": 20699,
+  "VersionName": "2.3.399",
   "FriendlyName": "MMD2Unreal",
   "Description": "次世代MMD的新入口",
   "Icon": "Resources/Icon128.png",
@@ -9,7 +9,8 @@
   "CreatedBy": "MMD2Unreal contributors",
   "CanContainContent": true,
   "IsBetaVersion": false,
-  "Installed": false,
+  "Installed": true,
+  "EngineVersion": "5.8.0",
   "SupportedTargetPlatforms": [
     "Win64"
   ],

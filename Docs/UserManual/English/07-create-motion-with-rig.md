@@ -12,9 +12,6 @@ If you already have a VMD motion and only want to correct it, see [08 Editing Ex
 - **Create Rig Binding** was enabled during model import. After import, the Content Browser should contain two Control Rig assets beginning with `CR_` and `CRMMD_` in the model folder.
 - If those assets are missing, import another copy of the model with **Create Rig Binding** enabled. Use a new empty folder if necessary to avoid same-name protection.
 - You have a level and an MMD character that can be placed in it.
-- Because of Unreal's plugin security policy, the first use of a model's Rig may require one compilation. Open the two CR assets in the Rig folder, click **Compile**, then close them.
-![CR setup](../DocPic/Controlrig_enable.jpg)
-![CR compile](../DocPic/Controlrig_Run.jpg)
 
 ## 1. Create a Level Sequence and Add the Character
 
@@ -32,6 +29,8 @@ If you already have a VMD motion and only want to correct it, see [08 Editing Ex
 ![Control Rig](../DocPic/Controlrig.jpg)
 4. Sequencer adds a Control Rig track and a Control Rig section. Expand it to see the controls that can be animated. Selecting a control in the list also selects it in the viewport, and selecting a control in the viewport locates it in Sequencer.
 5. If the controls are not visible, expand the Control Rig track and select one control, then move the viewport focus to the character. Also check that the eye icon on the track has not hidden the Rig.
+
+> **First-use note:** Control Rigs now compile automatically after being re-entered. If the controls have no effect the first time you add a Rig, trigger it once by either opening the matching `CR_` / `CRMMD_` asset or clicking the **Play** button in the level viewport. After playback ends, the Control Rig remains compiled; you do not need to repeat this step.
 
 ### Choosing Between `CR_` and `CRMMD_`
 
@@ -75,6 +74,7 @@ For more information about setting keyframes in Sequencer, see additional Unreal
 - Finger controls look like `CTRL_Thumb_1_L` or `CTRL_Index_1_R`. They are numbered from the base toward the fingertip. Selecting several controls on the same hand before setting a key makes it easier to keep a consistent hand shape.
 - Use `CTRL_Eye_L` and `CTRL_Eye_R` to aim the eyes. Pose the gaze on one frame, then change it and key it on later frames to make the character look at different points.
 - Face controls begin with `CTRL_Face_` and are grouped into areas such as eyes, mouth, and brows. Select a face slider, adjust it, and click the key button next to its channel in Sequencer. Face controls usually use values from 0 to 1. Key the same value at the beginning and end when an expression should hold.
+- **Starting with MMD2Unreal 2.1.05, only PMX Vertex Morphs generate Control Rig expression sliders. Bone, Group, UV, Material, Flip, and Impulse Morphs do not appear in the `CTRL_Face_` panel.**
 - PMX models can have different expression counts and Japanese names. If an expression is not immediately visible, expand the relevant face group; do not edit the Rig asset directly.
 
 ## 5. Adjust Keys and Curves

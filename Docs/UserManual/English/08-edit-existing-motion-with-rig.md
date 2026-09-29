@@ -17,9 +17,6 @@ If you are starting from an empty timeline, see [07 Creating Motion with Rig](07
 - You imported the VMD as described in [Importing Character Motion](05-import-motion.md), using a matching target Skeletal Mesh.
 - You have a Level Sequence with the same MMD character in the level and in Sequencer.
 - The Content Browser contains the `CRMMD_ModelName` Control Rig for this model. **Create Rig Binding** must have been enabled during model import.
-- Because of Unreal's plugin security policy, the first use of a model's Rig may require one compilation. Open the two CR assets in the Rig folder, click **Compile**, then close them.
-![CR setup](../DocPic/Controlrig_enable.jpg)
-![CR compile](../DocPic/Controlrig_Run.jpg)
 
 ## 1. Put the Existing Motion on the Base Layer
 
@@ -93,7 +90,7 @@ Trim the Control Rig section to the frames that need correction. Outside that ra
 1. Start playback before the correction range and confirm that the original timing is unchanged and the correction appears only on the intended frames.
 2. Check for sudden arm flips, feet passing through the floor, expression jumps, and abrupt starts or ends at the correction range.
 3. Save the Level Sequence. The base Animation Sequence and the upper `CRMMD_` control keys are evaluated together by Sequencer.
-4. To take the combined character motion back to MMD, continue with [09 Exporting Character Motion VMD](09-export-motion.md). Choose the current Sequencer as the source; the exporter reads the final pose and expressions after the base motion and layered Control Rig have been evaluated.
+4. To take the combined character motion back to MMD, continue with [09 Exporting Character Motion VMD](09-export-motion.md). Choose the current Sequencer as the source; the exporter reads the **final authoring-layer pose and expressions** after the base motion and layered Control Rig have been evaluated. PMX CCD, Grants, and physics from the Post Process AnimBP are not baked back into ordinary VMD bone tracks.
 
 The automatic binding algorithm for these model controllers is the result of substantial work by `RedialC`. If you use this Rig to produce motion data and find it useful, please credit the tool so more people can discover this modern MMD keyframing workflow.
 

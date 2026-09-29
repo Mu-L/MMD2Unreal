@@ -54,6 +54,7 @@ Several notes:
 - Physical effects like hair swaying are not recorded into this animation. So if hair stays still in the preview, it will move once played in the scene.
 - If the motion contains data for parts the model does not have, those parts are skipped automatically, and a message in the lower left corner lists what was skipped. Minor skips usually do not affect watching.
 - If the animation preview differs from MMD, check whether the post-process Animation Blueprint switch is enabled in the lower-right corner of the preview window.
+- If you now see the **arm or hand entering the torso, neck, head, legs, or opposite arm**, that is exactly what **Arm Constraint Correction** is designed to reduce. Leave the defaults alone for now; the next chapter explains Debug Draw and the useful tuning controls in detail.
 
 ## Same Name Conflict
 
@@ -79,4 +80,4 @@ Special expressions such as material color changes or bone shifts are not suppor
 
 ## Next Step
 
-The character can dance. Now bring the camera in too: [06 Importing a Camera](06-import-camera.md).
+The character can move now. First check the arms and hands for visible penetration into the body or legs: [05-2 Arm Constraint Correction](05-2-arm-constraint-correction.md). Once the motion looks clean, continue with [06 Importing a Camera](06-import-camera.md).

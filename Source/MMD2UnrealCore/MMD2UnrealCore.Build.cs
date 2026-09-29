@@ -15,6 +15,7 @@ public class MMD2UnrealCore : ModuleRules
             "CinematicCamera",
             "AnimationCore",
             "AnimGraphRuntime",
+            "IKRig",
             "MovieScene",
             "MovieSceneTracks"
         });

@@ -17,9 +17,6 @@
 - 已按[导入角色动作](05-导入角色动作.md)导入 VMD 动作，并选择了与角色匹配的目标 Skeletal Mesh。
 - 已准备一个 Level Sequence，并把同一个 MMD 角色放入关卡和 Sequencer。
 - 内容浏览器中能找到与该模型对应的 `CRMMD_模型名` Control Rig。导入模型时必须开启**创建 Rig 绑定（Create Rig Binding）**。
-- 受限于UE的插件安全策略，初次使用模型的rig前可能需要进行一次编译，找到rig目录下的两个CR资产，点击打开-点击编译-然后关闭即可。
-![CR 设置](DocPic/Controlrig_enable.jpg)
-![CR 编译](DocPic/Controlrig_Run.jpg)
 
 ## 一、把已有动作放到底层
 
@@ -93,7 +90,7 @@
 1. 从修正区间前开始播放，确认原动作的节奏没有被改变，修正只在预期的帧生效。
 2. 特别检查手臂是否突然翻转、脚是否穿地、面部滑块是否跳变，以及修正区间的首尾是否平滑。
 3. 保存 Level Sequence。上层 `CRMMD_` 的控制器关键帧和底层 Animation Sequence 会一起参与 Sequencer 的最终评估。
-4. 想把这段组合后的角色动作带回 MMD 时，继续看[09 导出角色动作 VMD](09-导出角色动作.md)。导出窗口选择当前 Sequencer 作为来源，插件会读取底层动作加上分层 Control Rig 后角色最终显示出来的骨骼和表情。
+4. 想把这段组合后的角色动作带回 MMD 时，继续看[09 导出角色动作 VMD](09-导出角色动作.md)。导出窗口选择当前 Sequencer 作为来源，插件会读取底层动作加上分层 Control Rig 后的**最终作者层骨骼和表情**；Post Process 中的 PMX CCD、追加变形与物理不会作为普通 VMD 骨轨再次烘焙。
 
 这套模型控制器的自动绑定算法是`RedialC`倾注了大量心血的产物，如果你使用了这套rig产出了动作数据并觉得好用,希望能够标注使用工具让更多人使用上现代化的MMD动作K帧流程！
 

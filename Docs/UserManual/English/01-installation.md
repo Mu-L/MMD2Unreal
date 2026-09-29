@@ -18,7 +18,12 @@ This chapter covers three things: downloading the plugin, placing it into your p
 4. In that release's page, find the attachments area (Assets) and download the archive file (usually ending in `.zip`).
 5. When the download finishes, remember where you saved it.
 
-## Step 2: Place the Plugin Into Your Project
+## Step 2: Choose and Install the Right Package
+
+- **Win64 standard package**: for Blueprint projects and most users. Extract it and place it in the project's `Plugins` folder as described below.
+- **C++ project package**: for C++ projects. Extract it to `UE_5.8/Engine/Plugins/Marketplace/MMD2Unreal`, then remove any older `MMD2Unreal` folder under the project's `Plugins` directory so it cannot override the engine installation.
+
+### Win64 Standard Package: Place It Into Your Project
 
 1. Locate your Unreal project folder on your computer. How to recognize it: it contains a file with the same name as your project, ending in `.uproject`.
 2. Check whether the folder contains a folder named **Plugins**. If not, create one yourself, spelling the name exactly.

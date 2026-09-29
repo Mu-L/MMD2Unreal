@@ -24,6 +24,14 @@ The previous chapters brought MMD content into Unreal. This chapter goes the oth
 5. Click **Export VMD**, choose a location and file name. The default name is the character name followed by `.vmd`.
 6. Wait for the progress bar to finish. A result report appears when the export is done.
 
+### IK, Post Process, and VMD compatibility
+
+Character VMD export preserves **MMD authoring data** instead of baking the already post-processed Unreal leg pose back into VMD.
+
+- Sequencer export temporarily disables the Post Process AnimBP while skeletal transforms are sampled.
+- Animation Sequence export reads the animation's own bone tracks.
+- Foot/toe IK controller tracks are therefore exported as controls, while PMX CCD, Grants, and physics are evaluated again by the model after the VMD returns to MMD.
+- This avoids solving the same IK once in Unreal and then a second time in MMD.
 ### Export Character Motion from an Animation Sequence
 
 ![Motion export from Animation Sequence](../DocPic/Motion_Out3.jpg)
@@ -95,8 +103,9 @@ The dialog lists bone groups from the model's PMX file and groups you created yo
 
 The defaults avoid groups whose names look like hair, skirt, or physics groups, because those parts are usually calculated by the physics system during playback.
 
-- **Include Physics Bones**: off by default. When off, dynamic PMX physics bones are excluded even if their group is selected. Turn it on only when you explicitly need that baked motion in the file.
+- **Include Physics Bones**: off by default. When off, dynamic PMX physics bones are excluded even if their group is selected. In the current version, turning it on only allows existing animation tracks on those bones to be exported; it **does not bake live KawaiiPhysics / Post Process simulation**.
 - **Include Morph Motion**: on by default. Includes model expressions such as blinking and mouth shapes. Turn it off to export bone motion only.
+- **Always export whole-body displacement bones**: on by default. In MMD the character's whole-body motion is carried by `全ての親` / `センター` / `グルーブ` / `腰`. While it is on, those bones are written to the VMD even when their group is not ticked, so the character's overall displacement is not lost. Turn it off to exclude them; the report then warns when they still carry displacement.
 
 The **Model Data** status at the bottom must be available. It comes from the information created when the model was imported and ensures that bones and expressions are exported with the correct MMD names.
 
@@ -138,15 +147,31 @@ Turn on **Include Morph Motion** in the character-motion export dialog. If the r
 
 ### Hair or skirt motion is missing after export
 
-Dynamic physics bones are excluded from character-motion exports by default. When you take the file back to MMD, hair and skirt motion is normally recalculated by MMD's physics system; this does not mean ordinary bone motion was lost. If you explicitly need the physics pose written into the VMD, turn on **Include Physics Bones**, but expect a larger file.
+Dynamic physics bones are excluded from character-motion exports by default. When you take the file back to MMD, hair and skirt motion is normally recalculated by MMD's physics system; this does not mean ordinary bone motion was lost. If those physics bones already contain authored animation tracks, **Include Physics Bones** can write those tracks into the VMD. The current version does not automatically bake live KawaiiPhysics results.
 
 ### Character-motion export is slow or the VMD is very large
 
 In **Key Generation Algorithm**, use **Curve Fitting Solver** when you want fewer keys, and **Fast Linear Interpolation** when you want a quick check. Avoid **Complete Per-frame Baking** unless you need it: it writes every frame and may make the VMD too large for MMD to load.
 
+### Motion is stable after changing interpolation to linear in MMD, but jitters with curve interpolation
+
+The current version writes bone Bézier interpolation using the standard MMD VMD layout. VMD files exported by an older version may show a specific symptom: changing the keys to linear interpolation in MMD makes the motion stable, while keeping the non-linear curves causes visible jitter. Re-export the VMD with the current version. You do not need to keep the motion linear or switch to Complete Per-frame Baking as a workaround.
+
+### Feet still slide or ankles still twist in an old VMD after updating the plugin
+
+If the VMD was produced from a Retarget Animation that had already been exported / baked before the update, its Animation Sequence still contains the old foot IK / toe IK controller tracks. Updating the plugin does not rewrite an existing animation. Export / bake the Animation Sequence again from the current `RTG_<ModelName>`, then export the VMD from that new animation.
+
+For these foot-target fixes alone, an existing RTG normally does not need to be rebuilt. If you also want **Leg Prebend → Enable Knee Prebend** and the older RTG does not show that option or reports missing knee data, reimport the PMX and overwrite **IK Rig / IK Retargeter**.
+
 ### The exported bone count is lower than expected
 
 Check that all required bone groups are ticked. Unclassified bones are excluded by default, and dynamic physics bones are also excluded while **Include Physics Bones** is off. The “Excluded physics bones” number in the report can help confirm this.
+
+### The character's overall position is wrong in MMD while the limbs look correct
+
+Check the notes in the export report first. MMD carries whole-character motion on bones such as `全ての親` and `センター`. When those bones are missing from the VMD, the character stays in place or only sways on the spot, while the limb motion still looks right. Keep **Always export whole-body displacement bones** on, or make sure the groups that contain those bones are ticked.
+
+If the report says foot / toe IK controllers stay static over the whole animation, the foot goals were never produced for that animation (common when the retargeted animation was not exported again after rebuilding the RTG). Rebuild the RTG in Unreal, export the character animation again, and then export the VMD.
 
 ### What can a character-motion VMD contain?
 
